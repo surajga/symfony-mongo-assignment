@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('resources/css/bootstrap.min.css') }}" />      
+    </head>
+    <body>
+        <div class="container">
+            <div class="d-flex align-items-center p-3 my-3 rounded shadow-sm">
+                {% if edit_id != 0 %}
+                    <h3>User Update</h3>
+                {% else %}
+                    <h3>User Add</h3>
+                {% endif %}
+            </div>
+
+            <div class="my-3 p-3 bg-white rounded shadow-sm"> 
+                <div class="row">  
+                    <div class="col-md-12"> 
+                        <div class="col-md-6"> 
+                            {{ form(form) }}
+                            <br />
+                            <a href="{{ path('user_index')}}" class="btn btn-sm btn-danger">Cancel</a>
+                       </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </body>
+</html>
