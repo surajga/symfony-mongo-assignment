@@ -50,7 +50,7 @@ class UserType extends AbstractType
             ])
             ->add('save', SubmitType::class,[
                 'attr' => ['class' => 'btn btn-sm btn-success']
-            ])
+            ])            
         ;
     }
 

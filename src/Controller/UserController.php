@@ -26,7 +26,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/add", name="user_add")
+     * @Route("/add", name="user_add", methods={"GET","POST"})
      */
     public function addAction(DocumentManager $dm,Request $request)
     {
@@ -49,7 +49,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", name="user_edit")
+     * @Route("/edit/{id}", name="user_edit", methods={"PUT"})
      */
     public function editAction(DocumentManager $dm,Request $request, $id)
     {
@@ -59,8 +59,8 @@ class UserController extends AbstractController
                 'There are no user with the following id: ' . $id
                 );            
         }
-        $form = $this->createForm(UserType::class, $user);
-
+        $form = $this->createForm(UserType::class, $user,['method'=>'PUT']);
+        // $form->setMethod('put');
         $form->handleRequest($request);
 
 		if ($form->isSubmitted()) {
@@ -70,7 +70,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_index');
         }
 
-        return $this->render('users/add.html.twig', [
+        return $this->render('users/edit.html.twig', [
             'edit_id' => $id,
             'form' => $form->createView(), 
         ]);
@@ -78,7 +78,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="user_delete", methods={"GET"})
+     * @Route("/delete/{id}", name="user_delete", methods={"DELETE"})
      */
     public function deleteAction(DocumentManager $dm,$id)
     {
